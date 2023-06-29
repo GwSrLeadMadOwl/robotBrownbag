@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230629 15:23:12.232" rpa="false" schemaversion="4">
+<suite id="s1" name="checkErrorsInLogin" source="c:\Users\s.rogozinnikovs\Desktop\RobotBrownbag_SergeiRogozinnikov\checkErrorsInLogin.robot">
+<kw name="Open google" library="loginResource" type="SETUP">
+<kw name="Open Current Browser" library="loginResource">
+<arg>chrome</arg>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>${browserpage}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20230629 15:23:12.860" level="INFO">Opening browser 'chrome' to base url 'https://www.basharacare.com/ae_en'.</msg>
+<status status="PASS" starttime="20230629 15:23:12.858" endtime="20230629 15:23:45.159"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20230629 15:23:45.160" endtime="20230629 15:23:45.980"/>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>${title}</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20230629 15:23:47.038" level="INFO">Page title is 'BasharaCare : Your Professional Skincare Store. Free Products Delivery Dubai Abu Dhabi UAE'.</msg>
+<status status="PASS" starttime="20230629 15:23:45.981" endtime="20230629 15:23:47.039"/>
+</kw>
+<status status="PASS" starttime="20230629 15:23:12.857" endtime="20230629 15:23:47.040"/>
+</kw>
+<status status="PASS" starttime="20230629 15:23:12.856" endtime="20230629 15:23:47.040"/>
+</kw>
+<test id="s1-t1" name="invalid email and password" line="11">
+<kw name="Check errors of login process" library="loginResource">
+<arg>${invalid_email}</arg>
+<arg>${invalid_password}</arg>
+<kw name="login to application" library="loginResource">
+<arg>${argemail}</arg>
+<arg>${argpassword}</arg>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>css:${login_button}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230629 15:23:47.063" level="INFO">Clicking button 'css:button.accountTrigger-trigger-cWR'.</msg>
+<status status="PASS" starttime="20230629 15:23:47.061" endtime="20230629 15:23:49.877"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>css:${email_input}</arg>
+<arg>${argemail}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230629 15:23:49.883" level="INFO">Typing text 'notuser@yahoo.com' into text field 'css:input.textInput-input-1BC'.</msg>
+<status status="PASS" starttime="20230629 15:23:49.878" endtime="20230629 15:23:51.922"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>css:${password_input}</arg>
+<arg>${argpassword}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20230629 15:23:51.924" level="INFO">Typing password into text field 'css:.password-root-VJi input.textInput-input-1BC'.</msg>
+<msg timestamp="20230629 15:23:52.162" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20230629 15:23:52.619" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230629 15:23:51.922" endtime="20230629 15:23:52.620"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>css:${signin_button}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230629 15:23:52.622" level="INFO">Clicking button 'css:button.button-root_highPriority-WS4'.</msg>
+<status status="PASS" starttime="20230629 15:23:52.621" endtime="20230629 15:23:54.471"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>css:${loading_icon}</arg>
+<arg>timeout=30</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20230629 15:23:54.474" endtime="20230629 15:24:02.393"/>
+</kw>
+<status status="PASS" starttime="20230629 15:23:47.059" endtime="20230629 15:24:02.394"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${received_msg}</var>
+<arg>css:div.errorMessage-root-uB8 .errorMessage-errorMessage-pas</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20230629 15:24:02.505" level="INFO">${received_msg} = The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.</msg>
+<status status="PASS" starttime="20230629 15:24:02.396" endtime="20230629 15:24:02.509"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${received_msg}</arg>
+<arg>${warning_msg}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230629 15:24:02.509" endtime="20230629 15:24:02.510"/>
+</kw>
+<status status="PASS" starttime="20230629 15:23:47.057" endtime="20230629 15:24:02.511"/>
+</kw>
+<status status="PASS" starttime="20230629 15:23:47.041" endtime="20230629 15:24:02.512"/>
+</test>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20230629 15:24:02.516" endtime="20230629 15:24:05.631"/>
+</kw>
+<status status="PASS" starttime="20230629 15:23:12.248" endtime="20230629 15:24:05.632"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="checkErrorsInLogin">checkErrorsInLogin</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
